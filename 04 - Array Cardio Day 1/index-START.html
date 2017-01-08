@@ -24,6 +24,7 @@
       { first: 'Ada', last: 'Lovelace', year: 1815, passed: 1852 },
       { first: 'Sarah E.', last: 'Goode', year: 1855, passed: 1905 },
       { first: 'Lise', last: 'Meitner', year: 1878, passed: 1968 },
+      { first: 'Jacob', last: 'Edgecase', year: 1500, passed: 1507 },
       { first: 'Hanna', last: 'Hammarström', year: 1829, passed: 1909 }
     ];
 
@@ -31,6 +32,29 @@
 
     // Array.prototype.filter()
     // 1. Filter the list of inventors for those who were born in the 1500's
+    function doubleOughtCheck(number) {
+      var numString = number.toString()
+      var finalTwo = numString.slice(2,4)
+      if(finalTwo == "00") {
+        return true
+      } else {
+        return false
+      }
+    }
+
+    function nextCentury(year) {
+      var century = year / 100
+      if(doubleOughtCheck(year)) {
+        return year + 100
+      } else {
+        return 100*(Math.ceil(century))
+      }
+    }
+
+    function centuryFilter(collection, cond) {
+      return collection.filter(item => item.year >= cond && item.year < nextCentury(cond)) // last bit not super efficient but doing it for time
+    }
+    console.table(centuryFilter(inventors, 1500))
 
     // Array.prototype.map()
     // 2. Give us an array of the inventors' first and last names
